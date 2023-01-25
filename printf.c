@@ -30,3 +30,33 @@ int _printf(const char *format, ...)
 				str = va_arg(args, char *);
 				if (str == NULL)
 					str = "(null)";
+				j = 0;
+				while (str[j] != '\0')
+				{
+					_putchar(str[j]);
+					j++;
+					count++;
+				}
+			}
+			else if (format[i] == '%')
+			{
+				_putchar('%');
+				count++;
+			}
+			else
+			{
+				_putchar('%');
+				_putchar(format[i]);
+				count += 2;
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			count++;
+		}
+		i++;
+	}
+	va_end(args);
+	return (count);
+}
