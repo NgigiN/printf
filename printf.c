@@ -26,7 +26,7 @@ void _printstr(void)
 {
 	id.str = va_arg(id.args, char *);
 	if (id.str == NULL)
-		id.str = "(null)";
+		id.str = " ";
 	id.j = 0;
 	while (id.str[id.j] != '\0')
 	{
@@ -45,11 +45,6 @@ void _printstr(void)
 
 int _printf(const char *format, ...)
 {
-	/*
-	*va_list args;
-	*int i = 0, j = 0, count = 0;
-	* char *str;
-	*/
 	id.i = 0, id.j = 0, id.count = 0;
 
 	if (format == NULL)
