@@ -17,6 +17,10 @@ struct global
 
 int _printf(const char *format, ...);
 int _putchar(char c);
+int check_string(char *string);
+void _printint(void);
+void _printchar(void);
+void _printstring(void);
 
 #endif /* MAIN_H */
 

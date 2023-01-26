@@ -27,12 +27,15 @@ void _printstr(void)
 	id.str = va_arg(id.args, char *);
 	if (id.str == NULL)
 		id.str = "(null)";
-	id.j = 0;
-	while (id.str[id.j] != '\0')
+	else
 	{
+		id.j = 0;
+		while (id.str[id.j] != '\0')
+		{
 		_putchar(id.str[id.j]);
 		id.j++;
 		id.count++;
+		}
 	}
 }
 
@@ -84,8 +87,7 @@ void _printint(void)
 
 int _printf(const char *format, ...)
 {
-	id.i = 0, id.j = 0, id.count = 0;
-
+	id.i = 0, id.j = 0, id.count = 0, id.str = malloc(1024 );
 	if (format == NULL)
 		return (-1);
 	va_start(id.args, format);
@@ -94,29 +96,19 @@ int _printf(const char *format, ...)
 		if (format[id.i] == '%')
 		{
 			id.i++;
-			switch (format[id.i])
-			{
-			case 'c':
+			if (format[id.i] == 'c')
 				_printchar();
-				break;
-			case 's':
+			else if (format[id.i] == 's')
 				_printstr();
-				break;
-			case 'd':
+			else if (format[id.i] == 'd' || format[id.i] == 'i')
 				_printint();
-				break;
-			case 'i':
-				_printint();
-				break;
-			case '%':
+			else if (format[id.i] == '%')
 				_putchar('%');
-				id.count++;
-				break;
-			default:
+			else
+			{
 				_putchar('%');
 				_putchar(format[id.i]);
 				id.count += 2;
-				break;
 			}
 		}
 		else
@@ -126,6 +118,7 @@ int _printf(const char *format, ...)
 		}
 		id.i++;
 	}
+	free(id.str);
 	va_end(id.args);
 	return (id.count);
 }
