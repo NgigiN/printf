@@ -1,62 +1,88 @@
 #include "main.h"
 
+
+
+/**
+ * _printchar - prints character
+ *
+ * Return: Nothing
+ *
+ */
+
+void _printchar(void)
+{
+	_putchar(va_arg(id.args, int));
+	id.count++;
+}
+
+/**
+ * _printstr - prints str
+ *
+ * Return: Nothing
+ *
+ */
+
+void _printstr(void)
+{
+	id.str = va_arg(id.args, char *);
+	if (id.str == NULL)
+		id.str = "(null)";
+	id.j = 0;
+	while (id.str[id.j] != '\0')
+	{
+		_putchar(id.str[id.j]);
+		id.j++;
+		id.count++;
+	}
+}
+
 /**
  * _printf - produces output according to a format
  * @format: character string
  * Return: number of characters printed
  */
 
+
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int i = 0, j = 0, count = 0;
-	char *str;
+	/*
+	*va_list args;
+	*int i = 0, j = 0, count = 0;
+	* char *str;
+	*/
+	id.i = 0, id.j = 0, id.count = 0;
 
 	if (format == NULL)
 		return (-1);
-	va_start(args, format);
-	while (format[i] != '\0')
+	va_start(id.args, format);
+	while (format[id.i] != '\0')
 	{
-		if (format[i] == '%')
+		if (format[id.i] == '%')
 		{
-			i++;
-			if (format[i] == 'c')
-			{
-				_putchar(va_arg(args, int));
-				count++;
-			}
-			else if (format[i] == 's')
-			{
-				str = va_arg(args, char *);
-				if (str == NULL)
-					str = "(null)";
-				j = 0;
-				while (str[j] != '\0')
-				{
-					_putchar(str[j]);
-					j++;
-					count++;
-				}
-			}
-			else if (format[i] == '%')
+			id.i++;
+			if (format[id.i] == 'c')
+				_printchar();
+			else if (format[id.i] == 's')
+				_printstr();
+			else if (format[id.i] == '%')
 			{
 				_putchar('%');
-				count++;
+				id.count++;
 			}
 			else
 			{
 				_putchar('%');
-				_putchar(format[i]);
-				count += 2;
+				_putchar(format[id.i]);
+				id.count += 2;
 			}
 		}
 		else
 		{
-			_putchar(format[i]);
-			count++;
+			_putchar(format[id.i]);
+			id.count++;
 		}
-		i++;
+		id.i++;
 	}
-	va_end(args);
-	return (count);
+	va_end(id.args);
+	return (id.count);
 }
