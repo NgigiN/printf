@@ -38,7 +38,7 @@ void _printstr(void)
 
 /**
  * _printint - prints integer
- * 
+ *
  * Return: void
 */
 
