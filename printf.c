@@ -94,22 +94,29 @@ int _printf(const char *format, ...)
 		if (format[id.i] == '%')
 		{
 			id.i++;
-			if (format[id.i] == 'c')
-				_printchar();
-			else if (format[id.i] == 's')
-				_printstr();
-			else if (format[id.i] == 'd' || format[id.i] == 'i')
-				_printint();
-			else if (format[id.i] == '%')
+			switch (format[id.i])
 			{
+			case 'c':
+				_printchar();
+				break;
+			case 's':
+				_printstr();
+				break;
+			case 'd':
+				_printint();
+				break;
+			case 'i':
+				_printint();
+				break;
+			case '%':
 				_putchar('%');
 				id.count++;
-			}
-			else
-			{
+				break;
+			default:
 				_putchar('%');
 				_putchar(format[id.i]);
 				id.count += 2;
+				break;
 			}
 		}
 		else
