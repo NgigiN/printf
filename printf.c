@@ -87,7 +87,7 @@ void _printint(void)
 
 int _printf(const char *format, ...)
 {
-	id.i = 0, id.j = 0, id.count = 0, id.str = malloc(1024 );
+	id.i = 0, id.j = 0, id.count = 0;
 	if (format == NULL)
 		return (-1);
 	va_start(id.args, format);
@@ -118,7 +118,6 @@ int _printf(const char *format, ...)
 		}
 		id.i++;
 	}
-	free(id.str);
 	va_end(id.args);
 	return (id.count);
 }
